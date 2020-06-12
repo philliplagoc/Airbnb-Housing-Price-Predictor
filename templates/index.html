@@ -16,25 +16,33 @@
 
   <body>
     
-    <div class = "login">
-      <h1>Price Predictor</h1>
-
+    <div class = "login" id = "scrollable-content">
+      <h1>Airbnb Price per Night Predictor</h1>
+      Helps you predict the price of your Airbnb listing per night! 
+      Check out my Github repo for this app <a href="https://github.com/philliplagoc/Airbnb-Housing-Price-Predictor">here.</a>
+      
       <!-- Main Input for Receiving Query to our ML -->
       <form action = "{{ url_for('predict')}}" method = "post">
+        <input type="text" name = "n_accommodates" placeholder = "How many people can it accommodate?" required = "required">
         <input type = "text" name = "n_beds" placeholder = "Number of bedrooms?" required = "required"/>
         <input type = "text" name = "n_baths" placeholder = "Number of bathrooms?" required = "required"/>
         <input type = "text" name = "security_deposit_amount" placeholder = "How much is the security deposit?" required = "required"/>
         <input type = "text" name = "cleaning_fee_amount" placeholder = "How much is the cleaning fee?" required = "required"/>
 
-        <!-- TODO: Figure out how dropboxes work and how to get values from a dropbox -->
-        <!-- TODO: Property type -->
+        <div>
+          <label for="property_type">Property Type</label>
+          <select name="property_type">
+            <option value="19">Apartment</option>
+            <option value="22">House</option>
+            <option value="23">Townhouse</option>
+            <option value="12">Other</option>
+          </select>
+        </div>
 
-
-        <!-- Button to make the prediction -->
+        <!-- Button to make prediction -->
         <button type="submit" class="btn btn-primary btn-block btn-large" >Predict Price</button>
       </form>
 
-      <br>
       <br>
       {{ prediction_text }}
     </div>

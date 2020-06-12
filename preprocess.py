@@ -352,11 +352,15 @@ def encode(frame, feature):
     for category, mapping in enc_dict.items():
         # Create a new column using the integer mapping sorted by median price
         frame.loc[frame[feature] == category, feature + '_enc'] = mapping
+    return enc_dict
         
 categ_vars_enc = []
+enc_dicts = []
 for var in categ_vars:  
-    encode(df_clean, var)
+    enc_dict = encode(df_clean, var)
+    enc_dicts.append(enc_dict)
     categ_vars_enc.append(var + '_enc')
+
     
 # This variable was not significant in determining price
 categ_vars_enc.remove('market_enc')
@@ -436,7 +440,7 @@ model_df.drop(['bedrooms_enc', 'has_bedrooms', 'accommodates_enc'], axis = 1, in
 
 # Ordinally encode accommodates
 df_clean['accommodates'] = df_clean['accommodates'].apply(str)
-encode(df_clean, 'accommodates')
+enc_dicts.append(encode(df_clean, 'accommodates'))
 categ_vars_enc.append('accommodates_enc')
 
 model_df['accommodates_enc'] = df_clean['accommodates_enc']
@@ -458,4 +462,6 @@ final_df = model_df.drop(vars_to_remove, axis = 1)
 
 
 # Export the cleaned data
-final_df.to_csv("cleaned_listings.csv")
+#final_df.to_csv("cleaned_listings.csv")
+
+print(enc_dicts)

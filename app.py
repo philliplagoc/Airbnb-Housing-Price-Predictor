@@ -6,6 +6,9 @@ import pickle
 
 app = Flask(__name__)
 
+# Dict for accommodations ordinal mapping
+acc_dict = {'1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '8': 6, '6': 7, '7': 8, '9': 9, '12': 10, '17': 11, '10': 12, '16': 13, '14': 14, '11': 15, '30': 16, '18': 17}
+
 @app.route('/')
 def home():
   return render_template('index.html')
@@ -13,6 +16,7 @@ def home():
 @app.route("/predict", methods = ["POST"])
 def predict():
   # Get user-inputted features 
+  n_accommodates = acc_dict[str(request.form['n_accommodates'])]
   n_beds = int(request.form['n_beds'])
   has_beds = 1 if n_beds > 0 else 0
   n_baths = int(request.form['n_baths'])
@@ -21,6 +25,7 @@ def predict():
   has_security_deposit = 1 if security_deposit_amount > 0 else 0
   cleaning_fee_amount = int(request.form['cleaning_fee_amount'])
   has_cleaning_fee = 1 if cleaning_fee_amount > 0 else 0
+  property_type = request.form['property_type']
 
   # Create the rest of the features
   # There's a specific ordering to the features according to the original data.
@@ -50,11 +55,11 @@ def predict():
   for verification in verifications:
     features.append(verification)
   features.append(176) # mode of host_verifications encoded 
-  features.append(19) # TODO: property type
+  features.append(property_type) # property type
   features.append(3) # mode room type
   features.append(5) # mode bed type
   features.append(0) # mode location
-  features.append(2) # mode no. accommodations
+  features.append(n_accommodates) 
 
   features = np.array(features).reshape(1, len(features))
 
@@ -66,5 +71,5 @@ def predict():
   
 # Start the server
 if __name__ == "__main__":
-  app.run()
+  app.run(debug = True)
 
