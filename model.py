@@ -22,7 +22,7 @@ warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 
 # Get data
-df = pd.read_csv("cleaned_listings.csv")
+df = pd.read_csv("data/cleaned_listings.csv")
 df = df.drop(columns = ["Unnamed: 0"])
 
 X = df[ [var for var in df.columns if var != "log_price"] ].values
@@ -278,13 +278,20 @@ else:
 
 
 # Bagging models
-### Aggregate average score together
-best_xgb_preds = xgb_best_model.predict(X_test)
-best_lgb_preds = lgb_best_model.predict(X_test)
-best_gb_preds = gb_best_model.predict(X_test)
-best_ab_preds = ab_best_model.predict(X_test)
+"""
+Predicts the price of a listing with the given features by bagging all of the models together.
 
-bagged_preds = (best_xgb_preds + best_lgb_preds + best_ab_preds + best_gb_preds) / 4
+Parameters:
+X - The features to predict from.
+"""
+def predict_price(X):
+  best_xgb_preds = xgb_best_model.predict(X)
+  best_lgb_preds = lgb_best_model.predict(X)
+  best_gb_preds = gb_best_model.predict(X)
+  best_ab_preds = ab_best_model.predict(X)
 
-print("Bagging MAE:", mean_absolute_error(y_test, bagged_preds))
+  bagged_preds = (best_xgb_preds + best_lgb_preds + best_ab_preds + best_gb_preds) / 4
 
+  return bagged_preds
+
+print("Bagging MAE:", mean_absolute_error(y_test, predict_price(X_test)))

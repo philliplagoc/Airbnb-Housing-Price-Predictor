@@ -459,4 +459,3 @@ final_df = model_df.drop(vars_to_remove, axis = 1)
 
 # Export the cleaned data
 final_df.to_csv("cleaned_listings.csv")
-
