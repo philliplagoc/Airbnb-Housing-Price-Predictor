@@ -18,5 +18,6 @@ If you want to run the process all
 
 ## Featured Notebook
 * [Airbnb Data Analysis](https://github.com/philliplagoc/AirBnb_Data_Analysis)
+
 This notebook explains the reasons behind the preprocessing and modelling I used in `preprocess.py` and `model.py`, respectively. 
 
