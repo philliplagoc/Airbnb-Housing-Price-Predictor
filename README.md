@@ -1,5 +1,5 @@
 # Airbnb Price per Night Predictor
-This project helps new Airbnb hosts decide a price for their listing. Users input several features about their listing and my model will predict a price they can potentially use. This is an extension of my Amsterdam Airbnb data analysis project.
+This project helps new Airbnb hosts decide a price for their listing. Users input several features about their listing and my model will predict a price they can potentially use. This is an extension of my Amsterdam Airbnb data analysis project, and is still a work in progress.
 
 [Try it out yourself](https://airbnb-price-predictor.herokuapp.com/)!
 
