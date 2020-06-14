@@ -8,7 +8,7 @@ In this project, I used public Airbnb data from [here](http://insideairbnb.com/g
 My final model achieved an MAE of 0.25, and it was deployed using Flask.
 
 ## Getting Started
-If you want to run the process all 
+If you want to run the process:
 1. Clone this repo.
 2. Install the requirements: `pip install -r requirements.txt`
 3. Preprocess the data: `python preprocess.py`
