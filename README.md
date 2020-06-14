@@ -5,7 +5,7 @@ This project helps new Airbnb hosts decide a price for their listing. Users inpu
 
 In this project, I used public Airbnb data from [here](http://insideairbnb.com/get-the-data.html). My model employed ensemble techniques. I used 4 boosting algorithms: XGBoost, LightGBM, AdaBoost, and GradientBoost. Then, I bagged them together by averaging their predictions.
 
-My final model achieved an MAE of 0.25, and it was deployed in Flask.
+My final model achieved an MAE of 0.25, and it was deployed using Flask.
 
 ## Getting Started
 If you want to run the process all 
