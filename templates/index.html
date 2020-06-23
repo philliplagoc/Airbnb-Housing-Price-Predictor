@@ -15,12 +15,12 @@
   </head>
 
   <body>
-    
-    <div class = "login" >
-      <h1>Airbnb Price per Night Predictor</h1>
+
+    <h1>Airbnb Price per Night Predictor</h1>
       Helps you predict the price of your Airbnb listing per night! 
       Check out my Github repo for this app <a href="https://github.com/philliplagoc/Airbnb-Housing-Price-Predictor">here.</a>
-      
+    
+    <div class = "login" >
       <!-- Main Input for Receiving Query to our ML -->
       <form action = "{{ url_for('predict')}}" method = "post">
         <input type="text" name = "n_accommodates" placeholder = "How many people can it accommodate?" required = "required">
@@ -28,7 +28,7 @@
         <input type = "text" name = "n_baths" placeholder = "Number of bathrooms?" required = "required"/>
         <input type = "text" name = "security_deposit_amount" placeholder = "How much is the security deposit?" required = "required"/>
         <input type = "text" name = "cleaning_fee_amount" placeholder = "How much is the cleaning fee?" required = "required"/>
-
+        <input type="text" name = "extra_people_amount" placeholder = "How much to charge for extra guests?" required ="required">
         <div>
           <label for="property_type">Property Type</label>
           <select name="property_type">
@@ -36,6 +36,14 @@
             <option value="22">House</option>
             <option value="23">Townhouse</option>
             <option value="12">Other</option>
+          </select>
+        </div>
+        <div>
+          <label for="room_type">Room Type</label>
+          <select name="room_type">
+            <option value="2">Private Room</option>
+            <option value="3">Entire Home/ Apartment</option>
+            <option value="1">Shared Room</option>
           </select>
         </div>
 

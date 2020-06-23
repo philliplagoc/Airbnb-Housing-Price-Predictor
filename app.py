@@ -26,6 +26,9 @@ def predict():
   cleaning_fee_amount = int(request.form['cleaning_fee_amount'])
   has_cleaning_fee = 1 if cleaning_fee_amount > 0 else 0
   property_type = request.form['property_type']
+  extra_people = int(request.form['extra_people_amount'])
+  has_extra_people = 1 if extra_people > 0 else 0
+  room_type = request.form['room_type']
 
   # Create the rest of the features
   # There's a specific ordering to the features according to the original data.
@@ -36,27 +39,27 @@ def predict():
   features.append(has_cleaning_fee)
   features.append(0) # availability_30 - assume none
   features.append(0) # days_as_host - assume none
-  features.append(0) # extra_people - assume none
+  features.append(has_extra_people) # has_extra_people - assume none
   ### Log-transform data
   features.append(0 if n_baths == 0 else np.log(n_baths))
   features.append(0 if n_beds == 0 else np.log(n_beds))
   features.append(0 if security_deposit_amount == 0 else np.log(security_deposit_amount))
   features.append(0 if cleaning_fee_amount == 0 else np.log(cleaning_fee_amount))
   features.append(0) # days_as_host - assume none
-  features.append(0) # extra_people - assume none
-  ### Deal with amenities. For now, assume no amenities at the listing.
+  features.append(extra_people) # extra_people - assume none
+  ### Assume no amenities
   amenities = [0] * 53
   for amenity in amenities:
     features.append(amenity)
-  features.append(1) # assume to be superhost
+  features.append(0) # assume to not be a superhost
   features.append(1) # assume to have profile_pic
-  ### Deal with verifications. For now, assume none.
+  ### Assume no verifications
   verifications = [0] * 15
   for verification in verifications:
     features.append(verification)
   features.append(176) # mode of host_verifications encoded 
-  features.append(property_type) # property type
-  features.append(3) # mode room type
+  features.append(property_type) 
+  features.append(room_type) 
   features.append(5) # mode bed type
   features.append(0) # mode location
   features.append(n_accommodates) 
