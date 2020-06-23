@@ -7,6 +7,8 @@ In this project, I used public Airbnb data from [here](http://insideairbnb.com/g
 
 My final model achieved an MAE of 0.25, and it was deployed using Flask.
 
+I also wrote a [blog post](https://philliplagoc.wordpress.com/2020/06/23/helping-airbnb-hosts-pick-a-price/) about why I did what I did for this project.
+
 ## Getting Started
 If you want to run the process:
 1. Clone this repo.
